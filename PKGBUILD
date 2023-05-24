@@ -3,7 +3,7 @@
 # Contributor: Michael Yeatts <mwyeatts@gmail.com>
 
 pkgname=python-typing_extensions
-pkgver=4.6.0
+pkgver=4.6.1
 pkgrel=1
 pkgdesc='Backported and Experimental Type Hints for Python 3.7+'
 arch=(any)
