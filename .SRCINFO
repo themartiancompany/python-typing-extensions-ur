@@ -1,6 +1,6 @@
 pkgbase = python-typing_extensions
 	pkgdesc = Backported and Experimental Type Hints for Python 3.7+
-	pkgver = 4.6.3
+	pkgver = 4.7.0
 	pkgrel = 1
 	url = https://github.com/python/typing_extensions
 	arch = any
@@ -13,7 +13,7 @@ pkgbase = python-typing_extensions
 	depends = python
 	provides = python-typing-extensions
 	conflicts = python-typing-extensions
-	source = git+https://github.com/python/typing_extensions.git#tag=c57333b77603298e2d79fdaf7632e09e40d11f54
+	source = git+https://github.com/python/typing_extensions.git#tag=633d2e2942372848d8d7859cf71a569259dba9ee
 	b2sums = SKIP
 
 pkgname = python-typing_extensions
