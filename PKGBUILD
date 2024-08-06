@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0
+#
+# Maintainer: Truocolo <truocolo@aol.com>
+# Maintainer: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
 # Maintainer: Maxime Gauduin <alucryd@archlinux.org>
 # Maintainer: Daniel M. Capella <polyzen@archlinux.org>
 # Contributor: Michael Yeatts <mwyeatts@gmail.com>
