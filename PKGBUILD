@@ -27,7 +27,7 @@ arch=(
 )
 _http="https://github.com"
 _ns="python"
-url="${_http}/${_ns}/${_pkg}"
+url="${_http}/${_ns}/${_Pkg}"
 license=(
   custom
 )

@@ -1,4 +1,4 @@
-# `python-typing_extensions`
+# `python-typing-extensions`
 
 universal recipe for [user repo](../themartiancompany/ur).
 
