@@ -6,50 +6,108 @@
 # Maintainer: Daniel M. Capella <polyzen@archlinux.org>
 # Contributor: Michael Yeatts <mwyeatts@gmail.com>
 
-pkgname=python-typing_extensions
+_py="python"
+_pyver="$( \
+  "${_py}" \
+    -V | \
+    awk \
+      '{print $2}')"
+_pymajver="${_pyver%.*}"
+_pyminver="${_pymajver#*.}"
+_pynextver="${_pymajver%.*}.$(( \
+  ${_pyminver} + 1))"
+_Pkg=typing_extensions
+_pkg=typing-extensions
+pkgname="${_py}-${_pkg}"
 pkgver=4.9.0
 pkgrel=1
 pkgdesc='Backported and Experimental Type Hints for Python 3.8+'
-arch=(any)
-url=https://github.com/python/typing_extensions
-license=(custom)
-depends=(python)
-makedepends=(git python-build python-flit-core python-installer)
-checkdepends=(python-tests)
-provides=(python-typing-extensions)
-conflicts=(python-typing-extensions)
+arch=(
+  any
+)
+_http="https://github.com"
+_ns="python"
+url="${_http}/${_ns}/${_pkg}"
+license=(
+  custom
+)
+depends=(
+  "${_py}>=${_pymajver}"
+  "${_py}<${_pynextver}"
+)
+makedepends=(
+  git
+  "${_py}-build"
+  "${_py}-flit-core"
+  "${_py}-installer"
+)
+checkdepends=(
+  "${_py}-tests"
+)
+provides=(
+  "${_py}-${_Pkg}"
+)
+conflicts=(
+  "${_py}-${_Pkg}"
+)
 _tag=fc461d6faf4585849b561f2e4cbb06e9db095307
-source=("git+${url}.git#tag=${_tag}")
-b2sums=(SKIP)
+source=(
+  "${_pkg}-${pkgver}::git+${url}.git#tag=${_tag}"
+)
+b2sums=(
+  SKIP
+)
 
 pkgver() {
-  cd typing_extensions
-
-  git describe --tags
+  cd \
+    "${_pkg}-${pkgver}"
+  git \
+    describe \
+    --tags
 }
 
 build() {
-  cd typing_extensions
-
-  python -m build --wheel --skip-dependency-check --no-isolation
+  cd \
+    "${_pkg}-${pkgver}"
+  "${_py}" \
+    -m \
+      build \
+    --wheel \
+    --skip-dependency-check \
+    --no-isolation
 }
 
 check() {
-  cd typing_extensions
-
-  python -m unittest discover src
+  cd \
+    "${_pkg}-${pkgver}"
+  "${_py}" \
+    -m \
+      unittest \
+    discover \
+    src
 }
 
 package() {
-  cd typing_extensions
-
-  python -m installer --destdir="${pkgdir}" dist/*.whl
-
-  # Symlink license file
-  local site_packages=$(python -c "import site; print(site.getsitepackages()[0])")
-  install -d "${pkgdir}"/usr/share/licenses/${pkgname}
-  ln -s "${site_packages}"/typing_extensions-${pkgver}.dist-info/LICENSE \
-    "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+  local \
+    _site_packages
+  _site_packages=$( \
+    "${_py}" \
+      -c \
+        "import site; print(site.getsitepackages()[0])")
+  cd \
+    "${_pkg}-${pkgver}"
+  "${_py}" \
+    -m \
+      installer \
+    --destdir="${pkgdir}" \
+    dist/*.whl
+  install \
+    -d \
+    "${pkgdir}/usr/share/licenses/${pkgname}"
+  ln \
+    -s \
+    "${_site_packages}/${_Pkg}-${pkgver}.dist-info/LICENSE" \
+    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
 
 # vim: ts=2 sw=2 et:
